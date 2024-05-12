@@ -59,15 +59,16 @@ public class WebSecurityConfig {
 
 	private void setUrlSettings(HttpSecurity http) throws Exception {
 		http
-			.authorizeHttpRequests(authorizeRequest ->
-				authorizeRequest
-					.requestMatchers(
-						AntPathRequestMatcher.antMatcher("/auth/**")
-					).permitAll()
-					.requestMatchers(
-						AntPathRequestMatcher.antMatcher("/h2-console/**")
-					).permitAll()
-			);
+				.authorizeHttpRequests(authorizeRequest ->
+						authorizeRequest
+								.requestMatchers(
+										AntPathRequestMatcher.antMatcher("/auth/**")
+								).permitAll()
+								.requestMatchers(
+										AntPathRequestMatcher.antMatcher("/h2-console/**")
+								).permitAll()
+								.anyRequest().authenticated()
+				);
 	}
 
 	private void addFilter(HttpSecurity http) throws Exception {

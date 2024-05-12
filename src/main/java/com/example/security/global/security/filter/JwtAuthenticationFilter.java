@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-	@Value("spring.datasource.url")
+//	@Value("{spring.datasource.url}")
 	private String TOKEN_HEADER = "JWT_TOKEN";
 	private final TokenProvider tokenProvider;
 
@@ -50,9 +50,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		tokenProvider.validateToken(token);
 		Long userId = tokenProvider.resolveToken(token);
 		SecurityContext context = SecurityContextHolder.createEmptyContext();
-		// new UsernamePasswordAuthenticationToken(userId, null, authorities)
-		// context.setAuthentication();
+		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userId, null, null);
+		context.setAuthentication(authentication);
 		SecurityContextHolder.setContext(context);
-
+		filterChain.doFilter(request, response);
 	}
 }
