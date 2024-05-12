@@ -1,5 +1,6 @@
 package com.example.security.domain.auth.service;
 
+import com.example.security.domain.auth.dto.AuthRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -39,5 +40,9 @@ public class UserService {
 			.role(Role.USER)
 			.build();
 		userRepository.save(user);
+	}
+
+	public void reissue(AuthRequest.Reissue reissue) {
+
 	}
 }

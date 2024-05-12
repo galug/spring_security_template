@@ -1,5 +1,6 @@
 package com.example.security.domain.auth.controller;
 
+import com.example.security.domain.auth.dto.AuthRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,6 +30,13 @@ public class AuthController {
     public BaseResponse signup(@RequestBody UserNamePasswordDto userNamePasswordDto) {
         log.info("회원 가입 완료 ~~~~~~~`");
         userService.create(userNamePasswordDto);
+        return BaseResponse.ok();
+    }
+
+    @PostMapping("/reissue")
+    public BaseResponse reissue(@RequestBody AuthRequest.Reissue reissue) {
+        log.info("회원 가입 완료 ~~~~~~~`");
+        userService.reissue(reissue);
         return BaseResponse.ok();
     }
 
